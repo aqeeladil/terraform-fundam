@@ -73,9 +73,6 @@ terraform destroy
 ```bash
 terraform output
 ```
-![Terraform Workflow](https://drive.google.com/file/d/1kpC4IGQLKgHcccW25aJcPK5t09Treoqp/view?usp=sharing).
-
-![Terraform Setup](https://drive.google.com/file/d/1tUiJEq7aQk7cbGdajtm23GhtG_PXBoWc/view?usp=sharing).
 
 ### Does terraform follows the concept of Api as code? 
 
