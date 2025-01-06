@@ -111,3 +111,50 @@ These are some of the essential terms you'll encounter when working with Terrafo
 
 - The closest Terraform comes to "API as Code" is the way you define the desired state of your infrastructure in code and then Terraform translates that into API calls to manage the infrastructure.
 
+## Differences between Terraform and Ansible
+
+**Ansible:** Solves Configuration Management problems.
+
+**Terraform:** Solves Infrastructure Management problems using Infrastructure as Code (IaC) principles.
+
+### Example Scenario:
+- You join an organization with **100 virtual machines (VMs)**:
+   - 50 Windows VMs
+   - 50 Linux VMs (Debian, CentOS, RHEL, Alpine)
+
+**The Challenge:** Writing scripts that work across multiple OS types and distributions with varying package managers. You’d also need passwordless authentication between servers.
+
+**Ansible's Solution:**
+- Provide the **DNS or IP addresses** of the VMs.
+- Set up **passwordless authentication** (one-time setup).
+- Write an **Ansible Playbook** to manage configurations (install packages, upgrade versions, apply security patches) across all VMs seamlessly.
+
+**Terraform's Solution:**
+- Organizations often use multiple cloud providers (**AWS, Azure, OpenStack**).
+- Each provider has its own infrastructure management tools (**CloudFormation**, **Azure Resource Manager**, **Heat Templates**).
+- **Terraform simplifies this:** Write a single configuration script, and Terraform interacts with each provider’s APIs to create and manage resources.
+
+### Key Difference Between Ansible and Terraform
+- **Ansible:** Best for **Configuration Management** (e.g., installing MySQL on multiple servers).
+- **Terraform:** Best for **Infrastructure Provisioning** (e.g., creating VMs, VPCs, and S3 buckets).
+
+### Real-World Workflow Example:
+1. Use **Terraform** to:
+   - Create VMs
+   - Set up VPC configuration
+   - Integrate S3 storage
+
+2. Use **Ansible** to:
+   - Install MySQL database
+   - Apply software updates
+
+If you need **100 identical VMs**:
+- Use **Terraform** to replicate infrastructure.
+- Use **Ansible** to configure software on all machines.
+
+- **Terraform:** Focus on **infrastructure creation and management.**
+- **Ansible:** Focus on **configuration and software deployment.**
+
+While both tools have overlapping capabilities, stick to their core strengths for efficiency.
+
+

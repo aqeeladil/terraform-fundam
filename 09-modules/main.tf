@@ -1,11 +1,11 @@
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
 }
 
 module "ec2_instance" {
   source = "./modules/ec2_instance"
-  ami_value = "ami-053b0d53c279acc90" # replace this
-  instance_type = "t2.micro"
-  subnet_id = "subnet-019ea91ed9b5252e7". # replace this
+  ami_value = var.ami_value
+  instance_type = var.instance_type
+  subnet_id = var.subnet_id
 }
 
