@@ -95,6 +95,89 @@ You configure providers in your Terraform code to interact with the desired infr
 
 These are some of the essential terms you'll encounter when working with Terraform. As you start using Terraform for your infrastructure provisioning and management, you'll become more familiar with these concepts and how they fit together in your IaC workflows.
 
+## Terraform Directory Structure
+
+In a typical Terraform project, you organize your configuration into multiple files (`main.tf`, `input.tf`, `output.tf`, `variables.tf`) to improve readability and maintainability.
+
+1. **`main.tf`:**
+
+  This file defines the core infrastructure resources and references inputs, outputs, and variables.
+
+  ```hcl
+  provider "aws" {
+    region = var.aws_region
+  }
+
+  resource "aws_instance" "web" {
+    ami           = var.ami_id
+    instance_type = var.instance_type
+    tags = {
+      Name = var.instance_name
+    }
+  }
+
+  output "instance_public_ip" {
+    value = aws_instance.web.public_ip
+  }
+  ```
+
+2. **`variables.tf`:**
+
+  This file declares the input variables for the project, including default values and types.
+
+  ```hcl
+  variable "aws_region" {
+    description = "AWS region where resources will be created"
+    type        = string
+    default     = "us-east-1"
+  }
+
+  variable "ami_id" {
+    description = "AMI ID for the EC2 instance"
+    type        = string
+  }
+
+  variable "instance_type" {
+    description = "Type of EC2 instance"
+    type        = string
+    default     = "t2.micro"
+  }
+
+  variable "instance_name" {
+    description = "Name tag for the EC2 instance"
+    type        = string
+    default     = "MyInstance"
+  }
+  ```
+
+3. **`input.tf`(Optional):**
+
+  Sometimes, you use this file to define specific input configurations or modules. This is less common unless you're working with modules.
+
+  ```hcl
+  module "network" {
+    source      = "./modules/network"
+    vpc_cidr    = var.vpc_cidr
+    subnet_cidr = var.subnet_cidr
+  }
+  ```
+
+4. **`output.tf`:**
+
+  This file defines outputs that provide information about the resources after they're created.
+
+  ```hcl
+  output "instance_id" {
+    description = "The ID of the created EC2 instance"
+    value       = aws_instance.web.id
+  }
+
+  output "instance_public_ip" {
+    description = "The public IP of the created EC2 instance"
+    value       = aws_instance.web.public_ip
+  }
+  ```
+
 ## Problems with Terraform?
 
 - State file is single source of truth.
