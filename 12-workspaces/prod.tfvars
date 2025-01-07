@@ -1,0 +1,1 @@
+ami = "ami-0abcd1234prod"
